@@ -15,5 +15,6 @@ import check_out from './image/check_out.svg';
 import login from './image/login.svg';
 import register from './image/register.svg';
 import toko from './image/toko.svg';
+import dumy from './image/dumy.jpg';
 
-export {bell, discord, facebook, github, instagram, hum, messege, telegram, trolly, twitter, check_out, login, register, toko};
+export {bell, discord, facebook, github, instagram, hum, messege, telegram, trolly, twitter, check_out, login, register, toko, dumy};
