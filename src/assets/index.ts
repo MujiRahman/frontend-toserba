@@ -12,8 +12,8 @@ import twitter from './icon/twitter.svg';
 
 // dari image
 import check_out from './image/check_out.svg';
-import login from './image/login.svg';
-import register from './image/register.svg';
+import login from './image/login.jpg';
+import register from './image/register.jpg';
 import toko from './image/toko.svg';
 import dumy from './image/dumy.jpg';
 

@@ -7,7 +7,7 @@ interface Props{
 
 export const BlogItem: React.FC<Props> = () => {
     return (
-        <section className="max-h-64 w-48 border-2 border-black rounded-lg shadow">
+        <section className="max-h-64 w-48 border-2 border-black rounded-lg shadow box-border">
             <button>
                 <img src={dumy} alt="img thumbnail" className="w-25 h-28 mx-2 mt-1 rounded"/>
             </button>
