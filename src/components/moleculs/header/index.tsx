@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import { bell, hum, messege, toko, trolly } from '../../../assets';
 // import Input from '../../atoms/input';
 
@@ -7,9 +8,10 @@ interface Props{
 }
 
 export const Header: React.FC<Props> = () => {
+    const history=useHistory();
     return (
         <nav className="absolute shadow bg-white w-full bg-white flex p-4 px-2 items-center">
-            <div className="w-1/2 md:w-2/12">
+            <div className="w-1/2 md:w-2/12 lg:ml-14">
                 <div className=" inline-flex justify-start items-start md:flex">
                     <button className="w-8 h-5 md:hidden">
                         <img src={hum} alt="humberger menu"/>
@@ -22,9 +24,9 @@ export const Header: React.FC<Props> = () => {
                     </div>
                 </div>
             </div>
-            <div className="hidden md:block md w-9/12 -ml-5">
+            <div className="hidden md:block md w-9/12 lg:-ml-24 lg:-mr-8 ">
                 <div className="flex justify-around items-center">
-                    <button className="from-green-400 bg-mid-gray">
+                    <button className="from-green-400 bg-mid-gray mr-4">
                         kategori
                     </button>
                     <input type="text" name="search" id="search" placeholder="pencarian di sini..." className="w-full h-10  border-2 rounded p-2 px-2 ml-5"/>
@@ -40,10 +42,10 @@ export const Header: React.FC<Props> = () => {
                     <p className="mx-5 text-2xl">|</p>
                 </div>
             </div>
-            <div className="w-1/2 md:w-1/12 mx-5">
+            <div className="w-1/2 md:w-1/12 mx-5 lg:mr-12">
                 <div className="flex justify-end md:felx">
-                    <button className="hidden md:block">my</button>
-                    <button className="ml-5 mb-3 md:mb-0">profil</button>
+                    <button className="hidden md:block" onClick={()=>history.push('/login')}>My_Profil</button>
+                    <button className="ml-5 mb-3 md:mb-0" onClick={()=>history.push('/register')}>Seller</button>
                 </div>
             </div>
         </nav>
