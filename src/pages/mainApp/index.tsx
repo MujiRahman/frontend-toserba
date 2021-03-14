@@ -12,11 +12,11 @@ interface Props{
 
 export const MainApp: React.FC<Props> = () => {
     return (
-        <div className="flex flex-row w-full h-screen">
+        <div className="flex flex-row relative">
             <div className="fixed w-full">
                 <Header />
             </div>
-            <div className="">
+            <div className="mt-24 mb-32">
                 <Router>
                     <Switch>
                         <Route path="/detail_product">
@@ -31,7 +31,7 @@ export const MainApp: React.FC<Props> = () => {
                     </Switch>
                 </Router>
             </div>
-            <div className="w-full absolute inset-x-0 bottom-0">
+            <div className="w-full absolute bottom-0 ">
                 <Footer />
             </div>
         </div>

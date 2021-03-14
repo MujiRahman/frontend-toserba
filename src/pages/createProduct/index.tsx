@@ -7,7 +7,7 @@ interface Props{
 
 const CreateProduct: React.FC<Props> = () => {
     return (
-        <div className="p-6">
+        <div className="p-6 mb-8 -mt-6">
             <p className="text-center font-sans font-semibold text-2xl text-green-500">Jual Barang Baru</p>
             <form className="">
                 <label className="flex flex-row mb-2">Nama Barang</label>
