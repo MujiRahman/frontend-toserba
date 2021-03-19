@@ -1,6 +1,5 @@
 import React from 'react'
 import { dumy } from '../../assets';
-// import CreateProduct from '../createProduct';
 
 interface Props{
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom';
 import { hum, toko } from '../../../assets';
 import { Messagge } from '../../atoms/message';
 import { Notification } from '../../atoms/notification';
@@ -8,7 +7,6 @@ import { MyProfil } from '../../atoms/myProfil';
 import { Seller } from '../../atoms/seller';
 
 export const Header = () => {
-    const history=useHistory();
     return (
         <nav className="absolute shadow bg-white w-full bg-white flex justify-evenly p-4 px-2 items-center">
             <div className="w-1/2 md:w-2/12 lg:ml-4 ">
@@ -38,9 +36,8 @@ export const Header = () => {
             </div>
             <div className="w-1/2 md:w-1/12">
                 <div className="flex justify-evenly">
-                    <MyProfil className="hidden md:block" 
-                        onClick={()=>history.push('/login')}/>
-                    <Seller onClick={()=>history.push('/register')}/>
+                    <MyProfil className="hidden md:block"/>
+                    <Seller/>
                 </div>
             </div>
         </nav>
