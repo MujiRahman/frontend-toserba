@@ -27,7 +27,7 @@ export const Seller: React.FC<Props> = ({className}) => {
                     <hr className=" border border-grey-500 mb-1"/>
                     <p className=" font-semibold p-1 ">Tokopedia Seller</p>
                     <p className="-mt-2 text-xs p-2">Pantau pesanan yang masuk dan cek perkembangan tokomu secara rutin di satu tempat</p>
-                    <button className="w-full whitespace-no-wrap p-2 bg-green-500 hover:bg-green-700" onClick={()=>history.push('/create_product')}>cek Tokopedia Seller</button>
+                    <button className="w-full whitespace-no-wrap p-2 bg-green-500 hover:bg-green-700" onClick={()=>history.push('/seller')}>cek Tokopedia Seller</button>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ interface Props{
 export const Messagge: React.FC<Props> = ({className}) =>{
     return(
         <div className={className}>
-            <div className="dropdown inline-block relative ">
+            <div className="dropdown inline-block relative">
                 <button className="p-2 rounded inline-flex items-center hover:bg-gray-100">
                     <img src={messege} alt="message" className="w-8"/>
                 </button>

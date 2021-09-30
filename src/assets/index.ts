@@ -13,8 +13,8 @@ import youtube from './icon/youtube.svg';
 // dari image
 import check_out from './image/check_out.svg';
 import login from './image/login.jpg';
-import register from './image/register.jpg';
+import registerbg from './image/registerbg.jpg';
 import toko from './image/toko.svg';
 import dumy from './image/dumy.jpg';
 
-export {bell, discord, facebook, github, instagram, hum, messege, telegram, trolly, youtube, check_out, login, register, toko, dumy};
+export {bell, discord, facebook, github, instagram, hum, messege, telegram, trolly, youtube, check_out, login, registerbg, toko, dumy};

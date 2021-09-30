@@ -3,4 +3,7 @@
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+.klik:hover .klick-menu {
+    display: block;
+}
 @tailwind utilities;

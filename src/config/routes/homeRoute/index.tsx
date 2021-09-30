@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import CreateProduct from '../../../pages/createProduct';
 import DetailProduct from '../../../pages/detailProduct';
 import Home from '../../../pages/home';
+import SellerUser from '../../../pages/sellerUser';
 
 interface Props{
 
@@ -11,10 +12,10 @@ interface Props{
 export const HomeRoute: React.FC<Props> = () => {
     return (
         <Switch>
-            <Route path="/create_product">
-                <CreateProduct/>
+            <Route path="/seller">
+                <SellerUser/>
             </Route>
-            <Route path="/detail_product">
+            <Route path="/detail_product/:_id">
                 <DetailProduct/>
             </Route>
             <Route path="/">

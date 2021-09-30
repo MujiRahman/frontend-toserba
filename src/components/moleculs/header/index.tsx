@@ -8,7 +8,7 @@ import { Seller } from '../../atoms/seller';
 
 export const Header = () => {
     return (
-        <nav className="absolute shadow bg-white w-full bg-white flex justify-evenly p-4 px-2 items-center">
+        <nav className="absolute shadow bg-white w-full bg-white flex justify-evenly p-4 px-2 items-center z-20">
             <div className="w-1/2 md:w-2/12 lg:ml-4 ">
                 <div className=" inline-flex justify-start items-start md:flex">
                     <button className="w-8 h-5 md:hidden">
