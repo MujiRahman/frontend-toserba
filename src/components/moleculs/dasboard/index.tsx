@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
 
 interface Props{
-    className: string
+    // className: string
     // id:string
 }
-const Dashboard: FC<Props> = ({className}) => {
+const Dashboard: FC<Props> = () => {
     return (
-        <div className={className}>
-            <div>
-                <p>Barang Terjual</p>
-                <p>Chat Diskusi Product</p>
-                <p>Chat Pribadi Product</p>
+        <div className="w-full bg-yellow-200">
+            <div className="flex justify-around">
+                <p className="w-72 h-20 text-center pt-6 align-text-bottom border-2 border-black ">Barang Terjual</p>
+                <p className="w-72 h-20 text-center pt-6 align-text-bottom border-2 border-black ">Chat Diskusi Product</p>
+                <p className="w-72 h-20 text-center pt-6 align-text-bottom border-2 border-black ">Chat Pribadi Product</p>
             </div>
         </div>
     )

@@ -8,7 +8,7 @@ interface Props{
     asalKota: string,
     rating: string |number,
     terjual: string | number,
-    _id: string
+    _id: string 
 }
 
 export const BlogItem: React.FC<Props> = (props) => {

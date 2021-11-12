@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const setDataProduct = (page: any) => (dispatch: any) => {
-    axios.get(`http://localhost:4000/api/product/posts?page=${page}&perPage=2`)
+    axios.get(`http://localhost:4000/api/product/posts?page=${page}&perPage=14`)
         .then(result => {
             const responApi = result.data;
             console.log('isi result api', responApi.current_page)
@@ -18,3 +18,4 @@ export const setDataProduct = (page: any) => (dispatch: any) => {
             console.log('isi err', err)
         })
 };
+

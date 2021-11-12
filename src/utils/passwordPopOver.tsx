@@ -92,25 +92,24 @@ export default function PasswordPopover(props: Props) {
   };
 
   return (
-    <div
-      className={`popover__wrapper ${isVisible === true ? "open" : "close"}`}
-    >
+    <div>
       {props.children({
         validate,
         visible,
       })}
-      <div className="popover__content">
-        <div className="popover__message">
+      <div className={`absolute bg-white ${isVisible === true ? "focus:block z-40 opacity-100 visible transition-all transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) transition-duration: 150ms;" : "hidden"}`}>
+        <div className=" text-center p-2 border-solid border-2 border-black text-xs rounded-lg ">
           <p>Password Requirements : </p>
           <ul>
-            <li className={rule1 === true ? "line" : ""}>Min 8 Characters </li>
-            <li className={rule2 === true ? "line" : ""}>Lowercase (a-z)</li>
-            <li className={rule3 === true ? "line" : ""}>Uppercase (A-Z)</li>
-            <li className={rule4 === true ? "line" : ""}>Symbols (?#@..)</li>
-            <li className={rule5 === true ? "line" : ""}>Number (0-9)</li>
+            <li className={rule1 === true ? "line-through italic text-red-400" : ""}>Min 8 Characters </li>
+            <li className={rule2 === true ? "line-through italic text-red-400" : ""}>Lowercase (a-z)</li>
+            <li className={rule3 === true ? "line-through italic text-red-400" : ""}>Uppercase (A-Z)</li>
+            <li className={rule4 === true ? "line-through italic text-red-400" : ""}>Symbols (?#@..)</li>
+            <li className={rule5 === true ? "line-through italic text-red-400" : ""}>Number (0-9)</li>
           </ul>
         </div>
       </div>
     </div>
   );
 }
+

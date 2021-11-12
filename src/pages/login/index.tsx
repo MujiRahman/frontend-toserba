@@ -1,13 +1,28 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../assets';
+import { loginUserApi, setForm } from '../../config/action/userApi';
+import { RootStore } from '../../config/redux';
 
 interface Props{
 
 }
 
 const Login: React.FC<Props> = () => {
-    const history =useHistory();
+    const history = useHistory() 
+    const {form} =useSelector((state: RootStore) => state.userReducer)
+    const { email, password} =form;
+    const dispatch = useDispatch()
+    const props = {
+        history :useHistory()
+    };
+    
+
+    const handleLogin = () => {
+        dispatch(loginUserApi(form, props ))
+        console.log('isi email dan password', email, password)
+    }
     return (
         <section className="flex justify-center items-center h-screen box-border">
             <div className="hidden md:block md:w-2/3 xl:pl-24">
@@ -17,13 +32,13 @@ const Login: React.FC<Props> = () => {
                 <h2 className="text-center text-2xl font-sans font-medium mb-2">Mau Masuk Toko?</h2>
                 <form className="p-4 lg:px-14">
                     <label htmlFor="" className="flex flex-row">Email</label>
-                    <input type="text" className="mb-4 border border-black rounded w-full p-2" placeholder="masukan email anda..."/>
+                    <input type="text" className="mb-4 border border-black rounded w-full p-2" placeholder="masukan email anda..." value={email} onChange={(e)=>dispatch(setForm('email', e.target.value))}/>
                     <label htmlFor="" className="flex flex-row">Password</label>
-                    <input type="text" className="mb-4 border border-black rounded w-full p-2" placeholder="masukan password anda..."/>
+                    <input type="password" className="mb-4 border border-black rounded w-full p-2" placeholder="masukan password anda..." value={password} onChange={(e)=>dispatch(setForm('password', e.target.value))}/>
                 </form>
                 <div className="flex justify-evenly">
                     <button className="bg-red-500 py-2 px-4 rounded-2xl">Cencel</button>
-                    <button className="bg-blue-500 py-2 px-4 rounded-2xl" onClick={()=>history.push('/')}>Login</button>
+                    <button className="bg-blue-500 py-2 px-4 rounded-2xl" onClick={handleLogin}>Login</button>
                 </div>
                 <div>
                     <h3 className="text-green-400 font-light font-sans mt-14 ml-14 font-medium">Belum punya toko? <button className="underline italic" onClick={()=>history.push('/register')}>Klik disini.</button></h3>

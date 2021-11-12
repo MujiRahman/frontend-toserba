@@ -12,13 +12,16 @@ const Routes: React.FC<Props> = () => {
     return (
         <Router>
             <Switch>
+                <Route exact path="/">
+                    <MainApp/>
+                </Route>
                 <Route path="/login">
                     <Login/>
                 </Route>
                 <Route path="/register">
                     <Register/>
                 </Route>
-                <Route path="/">
+                <Route path="*">
                     <MainApp/>
                 </Route>
             </Switch>

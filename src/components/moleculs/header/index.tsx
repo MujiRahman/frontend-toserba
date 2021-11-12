@@ -5,8 +5,12 @@ import { Notification } from '../../atoms/notification';
 import { Trolly } from '../../atoms/trolly';
 import { MyProfil } from '../../atoms/myProfil';
 import { Seller } from '../../atoms/seller';
+import { useHistory} from 'react-router-dom';
+// import { MainApp} from '../../../config/routes/mainApp'
+
 
 export const Header = () => {
+    const history = useHistory()
     return (
         <nav className="absolute shadow bg-white w-full bg-white flex justify-evenly p-4 px-2 items-center z-20">
             <div className="w-1/2 md:w-2/12 lg:ml-4 ">
@@ -14,9 +18,9 @@ export const Header = () => {
                     <button className="w-8 h-5 md:hidden">
                         <img src={hum} alt="humberger menu"/>
                     </button>
-                    <a href="*" className="hidden md:block">
-                        <img src={toko} alt="gambar toko" className="w-15 h-12 ml-4 "/>
-                    </a>
+                    <div className="hidden md:block">
+                        <img src={toko} alt="gambar toko" onClick={()=> history.push('/')} className="w-15 h-12 ml-4 "/>
+                    </div>
                     <div className="w-15 h-7 px-2 border border-black rounded ml-2 md:hidden">
                         <input type="text" name="search" placeholder="pencarian di sini..." />
                     </div>
@@ -36,10 +40,15 @@ export const Header = () => {
             </div>
             <div className="w-1/2 md:w-1/12">
                 <div className="flex justify-evenly">
-                    <MyProfil className="hidden md:block"/>
-                    <Seller/>
-                </div>
+                        <MyProfil className="hidden md:block"/>
+                        <Seller/>
+                    </div>
             </div>
+            {/* <Switch>
+                <Route exact path="/home">
+                    <MainApp/>
+                </Route>
+            </Switch> */}
         </nav>
     );
 }
