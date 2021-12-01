@@ -3,7 +3,6 @@ import { messege } from '../../../assets'
 
 interface Props{
     className?:string |undefined,
-    // children?: ReactNode,
 }
 
 export const Messagge: React.FC<Props> = ({className}) =>{

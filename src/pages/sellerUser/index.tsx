@@ -13,23 +13,20 @@ import { RootStore } from '../../config/redux';
 const SellerUser = () => {
     const { isAuthenticated } = useSelector((state: RootStore) => state.userReducer);
     
-    
     if(!isAuthenticated) {
         return (<Redirect to="/" />)
     }
-    
 
-    
     return (
         <Router>
-            <div  className="flex gap-8 max-w-7xl mx-auto bg-green-200">
+            <div  className="flex gap-8 w-11/12 mx-auto">
                 <ul className="block text-center h-1/2 w-40 border-2 border-black">
                     <Link to="/seller"><li className="p-6 border-black bg-red-100 cursor-pointer" >Dasboard</li></Link> 
                     <Link to="/seller/pesenan"><li className="p-6 border-t-2 border-black bg-red-100 cursor-pointer ">Pesanan</li></Link>
                     <Link to="/seller/jual"><li className="p-6 border-t-2 border-black bg-red-100 cursor-pointer " >JualBarang</li></Link>
                     <Link to="/seller/allUserProduct"><li className="p-6 border-t-2 border-black bg-red-100 cursor-pointer ">All Product</li></Link>
                 </ul>
-                <div className="flex flex-wrap gap-6 ml-6">
+                <div className="flex flex-wrap gap-6">
                     <Switch>
                         <Route exact path="/seller">
                             <Dashboard />

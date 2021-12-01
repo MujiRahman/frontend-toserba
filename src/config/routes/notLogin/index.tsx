@@ -1,4 +1,3 @@
-import React,{ } from 'react'
 import { RootStore } from '../../../config/redux';
 import { Header } from '../../../components/moleculs/header';
 import { useSelector } from 'react-redux';

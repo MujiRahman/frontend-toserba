@@ -7,10 +7,6 @@ import { useHistory } from 'react-router-dom';
 import { registerbg } from '../../assets';
 import {  registerUserApi, setRegisterUser } from '../../config/action/userApi';
 
-interface Props{
-
-}
-
 type FormInput = {
     nama : string;
     email : string;
@@ -18,8 +14,7 @@ type FormInput = {
     rePassword : string;
 }
 
-const Register: React.FC<Props> = () => {
-    
+const Register = () => {
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, formState, watch, setError } = useForm<FormInput>();
     const password = useRef({});

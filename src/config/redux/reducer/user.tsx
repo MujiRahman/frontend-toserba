@@ -7,7 +7,6 @@ const initialStateUser: getUser ={
     }, 
     auth:{
         user: '',
-        token: '',
         image: '',
         email: '',
         password: '',
@@ -27,7 +26,13 @@ const initialStateUser: getUser ={
         email: '',
         password: '',
         rePassword:''
-    }
+    },
+    errorLogin:{
+        message: '',
+        errorsEmail: false,
+        errorsPassord: false
+    },
+    lengkap:false
 }
 
 const userReducer= (state = initialStateUser, action: any) => {
@@ -41,8 +46,13 @@ const userReducer= (state = initialStateUser, action: any) => {
                     [action.formType]:action.formValue
                 },
                 auth: action.payload,
-                imagePrev: action.payload,
                 isAuthenticated: true,
+            }
+        case 'USER-UPDATE':
+            return{
+                ...state,
+                auth: action.payload,
+                lengkap: true
             }
         case 'USER-LOGOUT':
             localStorage.clear()
@@ -77,6 +87,11 @@ const userReducer= (state = initialStateUser, action: any) => {
             return{
                 ...state,
                 imagePrev:action.payload
+            }
+        case 'ERROR-LOGIN':
+            return{
+                ...state,
+                errorLogin: action.payload
             }
         }
     return state

@@ -4,7 +4,7 @@ import { hum, toko } from '../../../assets'
 
 const NotHeader = () => {
     return (
-        <nav className="absolute shadow w-full bg-green-200 flex justify-evenly py-4 px-16 items-center z-20">
+        <nav className="absolute shadow w-full bg-white flex justify-evenly py-4 px-16 items-center z-20">
             <div className="w-1/2 md:w-2/12 lg:ml-4  ">
                 <div className=" inline-flex justify-start items-start md:flex">
                     <button className="w-8 h-5 md:hidden">

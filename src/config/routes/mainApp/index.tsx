@@ -16,7 +16,7 @@ export const MainApp: React.FC<Props> = () => {
             <div className="mt-24">
                 <HomeRoute/>
             </div>
-            <div className="relative whitespace-no-wrap">
+            <div className="relative">
                 <Footer />
             </div>
         </div>

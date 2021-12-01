@@ -30,14 +30,14 @@ export const loginUserApi = (form:any, props: any ) =>(dispatch: any) => {
         }
     }).then(res => {
         const hasil = res.data;
-        console.log('post success', hasil);
+        console.log('post success12', hasil.status, hasil);
         localStorage.setItem('user', JSON.stringify(hasil.user.nama))
         localStorage.setItem('token', hasil.token)
         dispatch({
             type: 'USER-LOGIN',
             payload: {
                 user:hasil.user.nama,
-                token:hasil.token,
+                asalKota:hasil.user.asalKota,
                 image: hasil.user.imageProfil,
                 email: hasil.user.email,
                 password: hasil.user.password,
@@ -56,7 +56,27 @@ export const loginUserApi = (form:any, props: any ) =>(dispatch: any) => {
         })
         props.history.push('/')
     }).catch(err => {
-        console.log('post gagal total',err);
+        console.log('post gagal total',err.response.data.message);
+        if(err.response.data.message === 'Email yang anda masukan salah!'){
+            dispatch({
+                type:'ERROR-LOGIN',
+                payload:{
+                    message: err.response.data.message,
+                    errorsEmail: true,
+                    errorsPassord: false
+                }
+            })
+        } 
+        if(err.response.data.message === 'Password Anda Salah!'){
+            dispatch({
+                type:'ERROR-LOGIN',
+                payload:{
+                    message: err.response.data.message,
+                    errorsEmail: false,
+                    errorsPassord: true,
+                }
+            })
+        }
     })
 }
 
@@ -82,24 +102,41 @@ export const registerUserApi = (data:any, props: any ) => {
     })
 }
 
-export const updateUserApi = ( auth: any) => {
-    const data ={
-        user: auth.user,
-        email : auth.email,
-        noHp : auth.noHp,
-        alamat: auth.alamat,
-        Image: auth.image
-    };
+export const updateUserApi = ( auth: any, props: any) => (dispatch: any) => {
+    const data = new FormData();
+    data.append('nama', auth.user)
+    data.append('email', auth.email)
+    data.append('noHp', auth.noHp)
+    data.append('alamat', auth.alamat)
+    data.append('asalKota', auth.asalKota)
+    data.append('image', auth.image)
 
-    console.log('isi auth token', auth.token)
-    
-    axios.put('http://localhost:4000/api/user/profil',queryString.stringify(data) , {
+    axios.put('http://localhost:4000/api/user/profil',data , {
         headers:{
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'auth-token' :  auth.token
+            'Content-Type': 'multipart/form-data',
+            'auth-token' :  localStorage.getItem('token')
         }
     }).then(res =>{
+        const hasil = res.data;
         console.log('sukses update', res)
+        dispatch({
+            type: 'USER-UPDATE',
+            payload: {
+                user:hasil.data.nama,
+                asalKota:hasil.data.asalKota,
+                image: hasil.data.imageProfil,
+                email: hasil.data.email,
+                password: hasil.data.password,
+                rePassword: hasil.data.rePassword,
+                noHp: hasil.data.noHp,
+                alamat: hasil.data.alamat,
+                productId: hasil.data.productId,
+                orderId: hasil.data.orderId,
+                pesenanId: hasil.data.pesenanId,
+                id: hasil.data._id
+            }
+        })
+        props.history.push('/profil')
     }).catch(err =>{
         console.log('isi error update', err)
     })

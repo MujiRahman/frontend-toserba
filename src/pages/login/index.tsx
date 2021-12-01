@@ -5,23 +5,19 @@ import { login } from '../../assets';
 import { loginUserApi, setForm } from '../../config/action/userApi';
 import { RootStore } from '../../config/redux';
 
-interface Props{
-
-}
-
-const Login: React.FC<Props> = () => {
+const Login = () => {
     const history = useHistory() 
-    const {form} =useSelector((state: RootStore) => state.userReducer)
+    const {form, errorLogin} =useSelector((state: RootStore) => state.userReducer)
     const { email, password} =form;
+    const { errorsEmail, errorsPassord, message} =errorLogin
     const dispatch = useDispatch()
     const props = {
         history :useHistory()
     };
-    
-
     const handleLogin = () => {
         dispatch(loginUserApi(form, props ))
         console.log('isi email dan password', email, password)
+        console.log('isi err login', errorLogin)
     }
     return (
         <section className="flex justify-center items-center h-screen box-border">
@@ -33,8 +29,10 @@ const Login: React.FC<Props> = () => {
                 <form className="p-4 lg:px-14">
                     <label htmlFor="" className="flex flex-row">Email</label>
                     <input type="text" className="mb-4 border border-black rounded w-full p-2" placeholder="masukan email anda..." value={email} onChange={(e)=>dispatch(setForm('email', e.target.value))}/>
+                    {errorsEmail && <p className="relative -mt-2 mb-2 text-xs text-red-400">* {message}</p>}
                     <label htmlFor="" className="flex flex-row">Password</label>
                     <input type="password" className="mb-4 border border-black rounded w-full p-2" placeholder="masukan password anda..." value={password} onChange={(e)=>dispatch(setForm('password', e.target.value))}/>
+                    {errorsPassord && <p className="relative -mt-2 mb-2 text-xs text-red-400">* {message}</p>}
                 </form>
                 <div className="flex justify-evenly">
                     <button className="bg-red-500 py-2 px-4 rounded-2xl">Cencel</button>

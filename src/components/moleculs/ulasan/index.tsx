@@ -1,16 +1,40 @@
-
 import React from 'react'
+import { FaStar } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../config/redux';
 
-interface Props{
-    // className?:string
-}
 
-const Ulasan:React.FC<Props> = () => {
+
+const Ulasan = () => {
+    const {getUlasan} = useSelector((state: RootStore)=> state.productReducer)
     return (
-        <div className="flex w-2/5 mb-20 p-2 bg-red-300 ">
-            <p className="mx-2">*****</p>
-            <p className="">isi Ulasan</p>
-        </div>
+        <>
+        {
+            getUlasan.map((ulas: any)=>{
+                const stars = Array(ulas.rating).fill(0)
+                return(
+                    <div className="flex">
+                        <img src={`http://localhost:4000/${ulas.gambar}`} alt="gambar user" className='w-20 h-20 rounded-full mr-4'/>
+                        <div className=" w-2/5 mb-20 p-2 ">
+                            <div className="flex mb-1">
+                                {
+                                    stars.map((_, index)=>{
+                                        return(
+                                            <FaStar
+                                            key={index}
+                                            color={"#FFBA5A"}
+                                            />
+                                        )
+                                    })
+                                }
+                            </div>
+                            <p className="text-sm">{ulas.ulasan}</p>
+                        </div>
+                    </div>
+                )
+            })
+        }
+        </>
     )
 }
 

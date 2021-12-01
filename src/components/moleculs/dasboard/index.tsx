@@ -1,10 +1,5 @@
-import React, { FC } from 'react'
 
-interface Props{
-    // className: string
-    // id:string
-}
-const Dashboard: FC<Props> = () => {
+const Dashboard = () => {
     return (
         <div className="w-full bg-yellow-200">
             <div className="flex justify-around">

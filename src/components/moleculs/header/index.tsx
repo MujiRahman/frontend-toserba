@@ -6,8 +6,6 @@ import { Trolly } from '../../atoms/trolly';
 import { MyProfil } from '../../atoms/myProfil';
 import { Seller } from '../../atoms/seller';
 import { useHistory} from 'react-router-dom';
-// import { MainApp} from '../../../config/routes/mainApp'
-
 
 export const Header = () => {
     const history = useHistory()
@@ -44,11 +42,6 @@ export const Header = () => {
                         <Seller/>
                     </div>
             </div>
-            {/* <Switch>
-                <Route exact path="/home">
-                    <MainApp/>
-                </Route>
-            </Switch> */}
         </nav>
     );
 }

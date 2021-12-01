@@ -10,7 +10,6 @@ export interface getUser{
         password: string | number,
     },
     auth:{
-        token: string,
         image: string | undefined,
         user: string,
         email: string,
@@ -31,7 +30,13 @@ export interface getUser{
         email: string,
         password: string,
         rePassword:string
-    }
+    },
+    errorLogin:{
+        message: string,
+        errorsEmail: boolean,
+        errorsPassord: boolean
+    },
+    lengkap: boolean
 }
 
 export interface product{
@@ -44,11 +49,13 @@ export interface product{
     },
     productUser: string[],
     getDiskusi: string[],
+    getUlasan:string[]
     // adaDiskusi: boolean
 }
 
 export interface order{
     order: string[] | any,
+    adaOrder:boolean,
     satuan:{
         _id: string,
         namaBarang: string,

@@ -1,17 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import CheckOut from '../../../pages/checkOut';
-// import CreateProduct from '../../../pages/createProduct';
 import DetailProduct from '../../../pages/detailProduct';
 import Home from '../../../pages/home';
 import ProfilUser from '../../../pages/profil';
 import SellerUser from '../../../pages/sellerUser';
 
-interface Props{
-
-}
-
-export const HomeRoute: React.FC<Props> = () => {
+export const HomeRoute = () => {
     return (
         <Switch>
             <Route path="/profil">

@@ -4,11 +4,7 @@ import { BlogItem } from '../../components/moleculs/blogItem';
 import { setDataProduct } from '../../config/action/homeApi';
 import { RootStore } from '../../config/redux';
 
-interface Props{
-
-}
-
-const Home: React.FC<Props> = () => {
+const Home = () => {
     const [counter, setCounter] = React.useState(1);
     const { allDataProduct, page } = useSelector((state: RootStore) => state.homeReducer);
     const dispatch = useDispatch()
@@ -41,8 +37,8 @@ const Home: React.FC<Props> = () => {
                             rating = {result.rating}
                             terjual = {result.terjual}
                             _id = {result._id}
-                            />)
-                        })
+                        />)
+                    })
                 }
             </div>
             <div className="flex my-6 justify-center">

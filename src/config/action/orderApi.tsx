@@ -5,7 +5,7 @@ export const setOrder = (satuanType: any, satuanValue: any) => {
     return{type: 'ORDER', satuanType, satuanValue }
 }
 
-export const orderBaru = (order: any) => {
+export const orderBaru = (order: any) => (dispatch: any) => {
     
     for (let i = 0; i < order.length; i++) {
         const data = {
@@ -14,7 +14,6 @@ export const orderBaru = (order: any) => {
             totalHarga: order[i].totalHargaOrder,
             alamat: order[i].alamatId,
             note: order[i].note,
-            // imageProduct: order[i].image
         }
         console.log('isi data', data)
         axios.post(`http://localhost:4000/api/order/addOrder/${order[i]._id}`,queryString.stringify(data) , {
@@ -24,6 +23,9 @@ export const orderBaru = (order: any) => {
             }
         }).then(res => {
             console.log('post success', res);
+            dispatch({
+                type: 'BAYAR'
+            })
         }).catch(err => {
             console.log('post gagal total');
         })
@@ -45,13 +47,20 @@ export const getAllOrderan = () => (dispatch: any) => {
     })
 }
 
-export const upDateOrderan = (id: string)   => {
+export const upDateOrderan = (id: string) => (dispatch: any) => {
     axios.post(`http://localhost:4000/api/order/upDateOrder/${id}`, {
         headers:{
             'auth-token' :  localStorage.getItem('token')
         }
     }).then(res => {
-        console.log('isi orderan update', res)
+        console.log('isi orderan update', res.data.data)
+        const sukses = res.data.data
+        dispatch({
+            type: 'ORDERAN-KIRIM',
+            payload:{
+                _id: sukses._id,
+            }
+        })
     }).catch(err => {
         console.log('isi err orderan', err)
     })
@@ -71,26 +80,39 @@ export const getAllPesenan = () => (dispatch: any) => {
     })
 }
 
-export const upDatePesenan = (id: string)   => {
-    axios.post(`http://localhost:4000/api/order/upDateOrder/${id}`, {
+export const upDatePesenan = (id: string, Prop:any) => (dispatch: any) => {
+    axios.post(`http://localhost:4000/api/order/upDateOrder1/${id}`, {
         headers:{
             'auth-token' :  localStorage.getItem('token')
         }
     }).then(res => {
+        const _id = res.data.data._id
         console.log('isi orderan update', res)
+        dispatch({
+            type: 'PESESNAN-KIRIM',
+            payload:{_id: res.data.data._id}
+        })
+        Prop.history.push(`/profil/Ulasan/${_id}`)
     }).catch(err => {
         console.log('isi err orderan', err)
     })
 }
 
-
-
-
-
-// namaBarang, jumlahBarang, totalHarga, alamat, note
-    // const data = new FormData()
-    // data.append('namaBarang', order[i].nama)
-    // data.append('jumlahBarang', order[i].harga)
-    // data.append('totalHarga', order[i].jumlahBarang)
-    // data.append('alamat', order[i].deskripsi)
-    // data.append('alamat', order[i].deskripsi)
+export const postUlasan = (_id: string, currentValue: number , isi: string, props: any) =>  {
+    const data = {
+        ulasan: isi,
+        rating: currentValue
+    }
+    console.log('isi ulasanapi', data)
+    axios.post(`http://localhost:4000/api/ulasan/post/${_id}`, queryString.stringify(data), {
+        headers:{
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'auth-token' :  localStorage.getItem('token')
+        }
+    }).then(res =>{
+        console.log('isi res ulasan', res)
+        props.history.push('/')
+    }).catch(err =>{
+        console.log('isi err ulasan', err)
+    })
+}

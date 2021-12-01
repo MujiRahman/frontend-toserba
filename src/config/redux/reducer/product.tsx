@@ -10,6 +10,7 @@ const initialStateHome: product = {
     },
     productUser: [],
     getDiskusi:[],
+    getUlasan:[]
     // adaDiskusi: false
 }
 
@@ -23,24 +24,39 @@ const productReducer = (state = initialStateHome, action: any) => {
                     [action.createProductType] : action.createProductValue
                 }
             }
-        case 'GET-ALL-PRODUCT-USER':
+        case 'GET-ALL-PRODUCT-USER':{
             return{
                 ...state,
                 productUser: action.payload
             }
+        }
+        case 'HAPUS-PRODUCT':{
+            let hapusProduct = state.productUser.filter((e: any)=> e._id !== action.payload._id)
+            return{
+                ...state,
+                productUser: hapusProduct
+            }
+        }
         case 'GET-DISKUSI':{
-            
             return{
                 ...state,
                 getDiskusi: action.payload,
-                // adaDiskusi: true
             }
         }
-        // case 'POST-DISKUSI':
-        //     return{
-        //         ...state,
-        //         diskusi:
-        //     }
+        case 'POST-DISKUSI':{
+            const diskusi = state.getDiskusi;
+            diskusi.push(action.payload.Comment)
+            return{
+                ...state,
+                getDiskusi: diskusi
+            }
+        }
+        case 'GET-ULASAN':{
+            return{
+                ...state,
+                getUlasan: action.payload
+            }
+        }
     }
     return state;
 }
