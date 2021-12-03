@@ -39,7 +39,7 @@ export const getAllOrderan = () => (dispatch: any) => {
             'auth-token' :  localStorage.getItem('token')
         }
     }).then(res => {
-        console.log('isi orderan', res.data.data)
+        // console.log('isi orderan', res.data.data)
         dispatch({ type: 'ORDERAN', payload: res.data.data })
         
     }).catch(err => {

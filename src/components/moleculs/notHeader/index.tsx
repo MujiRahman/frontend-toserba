@@ -10,7 +10,7 @@ const NotHeader = () => {
                     <button className="w-8 h-5 md:hidden">
                         <img src={hum} alt="humberger menu"/>
                     </button>
-                    <a href="*" className="hidden md:block">
+                    <a href="http://localhost:3000/" className="hidden md:block">
                         <img src={toko} alt="gambar toko" className="w-15 h-12"/>
                     </a>
                     <div className="w-15 h-7 px-2 border border-black rounded ml-2 md:hidden">

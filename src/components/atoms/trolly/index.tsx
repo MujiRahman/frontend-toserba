@@ -1,19 +1,16 @@
-import React from 'react'
+import React, { memo,  useMemo } from 'react'
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {  trolly } from '../../../assets';
 import { RootStore } from '../../../config/redux';
 
-interface Props{
-    className?:string|undefined,
-}
-
-export const Trolly: React.FC<Props> = ({className}) => {
+const Trolly= () => {
     const {order, adaOrder} = useSelector((state: RootStore)=> state.orderReduser)
     const history = useHistory()
-    console.log('isi adaorder', adaOrder)
+    useMemo(() => order, [order])
+    useMemo(() => adaOrder, [adaOrder])
     return (
-        <div className={className}>
+        <React.Fragment>
             <div className="dropdown inline-block relative">
                 <button className="p-2 rounded items-center hover:bg-gray-100">
                     <img src={trolly} alt="trolly" className="w-8"/>
@@ -47,6 +44,7 @@ export const Trolly: React.FC<Props> = ({className}) => {
                     }
                 
             </div>
-        </div>
+        </React.Fragment>
     );
 }
+export default memo(Trolly);

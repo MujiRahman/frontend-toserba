@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo, useMemo } from 'react'
 import { FaStar } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../../config/redux';
@@ -7,6 +7,7 @@ import { RootStore } from '../../../config/redux';
 
 const Ulasan = () => {
     const {getUlasan} = useSelector((state: RootStore)=> state.productReducer)
+    useMemo(() => getUlasan, [getUlasan])
     return (
         <>
         {
@@ -38,4 +39,4 @@ const Ulasan = () => {
     )
 }
 
-export default Ulasan;
+export default memo(Ulasan);

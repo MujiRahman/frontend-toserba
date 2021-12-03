@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useHistory } from 'react-router-dom';
 
 interface Props{
@@ -11,7 +11,8 @@ interface Props{
     _id: string 
 }
 
-export const BlogItem: React.FC<Props> = (props) => {
+const BlogItem: React.FC<Props> = (props) => {
+    console.log('blog item reder')
     const {imge, judul, harga, asalKota, rating, terjual, _id} = props
     const history = useHistory();
     return (
@@ -31,3 +32,5 @@ export const BlogItem: React.FC<Props> = (props) => {
         </section>
     );
 }
+
+export default memo(BlogItem)

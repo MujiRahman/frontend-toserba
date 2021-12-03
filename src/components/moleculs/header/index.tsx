@@ -2,7 +2,7 @@ import React from 'react'
 import { hum, toko } from '../../../assets';
 import { Messagge } from '../../atoms/message';
 import { Notification } from '../../atoms/notification';
-import { Trolly } from '../../atoms/trolly';
+import  Trolly  from '../../atoms/trolly';
 import { MyProfil } from '../../atoms/myProfil';
 import { Seller } from '../../atoms/seller';
 import { useHistory} from 'react-router-dom';

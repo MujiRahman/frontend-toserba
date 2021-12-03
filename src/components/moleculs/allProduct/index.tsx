@@ -4,8 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { RootStore } from '../../../config/redux';
 import { Redirect } from 'react-router';
 import { getAllDataUser } from '../../../config/action/productApi';
-// import { confirmAlert } from "react-confirm-alert";
-// import axios from 'axios';
 import Modal from '../modal';
 
 export const AllProductUser = () => {
@@ -15,42 +13,6 @@ export const AllProductUser = () => {
     const [id, setId] = useState<string>('');
     const history = useHistory();
     const dispatch = useDispatch()
-    
-    // const confirmDelete = (_id: string) => {
-    //     console.log('tekan tombol');
-    //     confirmAlert({
-    //         customUI: ({ onClose }) => {
-    //             return (
-    //                 <div className='bg-red-200 fixed overflow-hidden w-32 h-32 inset-2/4'>
-    //                     <h1>Are you sure?</h1>
-    //                     <p>You want to delete this file?</p>
-    //                     <button onClick={onClose}>No</button>
-    //                     <button
-    //                     onClick={() => {
-    //                         axios.delete(`http://localhost:4000/api/product/post/${_id}` , {
-    //                             headers:{
-    //                                 'auth-token' :  localStorage.getItem('token')
-    //                             }
-    //                         }).then(res => {
-    //                             console.log('hapus success', res);
-    //                             dispatch({
-    //                                 type: 'HAPUS-PRODUCT',
-    //                                 payload:{_id}
-    //                             })
-    //                         }).catch(err => {
-    //                             console.log('hapus gagal total');
-    //                         })
-    //                     console.log('tekan tombol12');
-    //                         onClose();
-    //                     }}
-    //                     >
-    //                     Yes, Delete it!
-    //                     </button>
-    //                 </div>
-    //             );
-    //         }
-    //         });
-    // }
     
     useEffect(() => {
         if(isAuthenticated){
@@ -73,7 +35,6 @@ export const AllProductUser = () => {
             productUser.map((hasil:any) => {
             return(
                 <div className="max-h-60 w-40 border-2 border-black rounded-lg shadow box-border p-1 box-border cursor-pointer" key={hasil._id}>
-                    {/* {modalOpen && <Modal setOpenModal={setModalOpen} _id={hasil._id} />} */}
                     <img src={`http://localhost:4000/imagesId/${hasil.imageId[0]}`} alt="img thumbnail" className="w-40 h-28 rounded"/>
                     <div className="px-1">
                         <p className="ont-sans truncate leading-tight">{hasil.nama}</p>

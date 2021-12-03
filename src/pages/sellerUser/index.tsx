@@ -26,7 +26,7 @@ const SellerUser = () => {
                     <Link to="/seller/jual"><li className="p-6 border-t-2 border-black bg-red-100 cursor-pointer " >JualBarang</li></Link>
                     <Link to="/seller/allUserProduct"><li className="p-6 border-t-2 border-black bg-red-100 cursor-pointer ">All Product</li></Link>
                 </ul>
-                <div className="flex flex-wrap gap-6">
+                <div >
                     <Switch>
                         <Route exact path="/seller">
                             <Dashboard />

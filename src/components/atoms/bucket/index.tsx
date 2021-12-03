@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 
 interface Props{
     className?:string,
@@ -13,6 +13,7 @@ interface Props{
 }
 
 const Bucket: FC<Props> = ({className, onclick, tambah, kurang, note, totalHarga, jumlah, stock, tambahKranjang }) => {
+    console.log('bucket render')
     return (
         <div className={className}>
             <div className="w-72 h-80 border-2 border-grey rounded-xl p-4 shadow-lg bg-white ">
@@ -37,4 +38,4 @@ const Bucket: FC<Props> = ({className, onclick, tambah, kurang, note, totalHarga
     )
 }
 
-export default Bucket;
+export default memo(Bucket);

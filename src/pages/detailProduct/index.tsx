@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo,  useMemo } from 'react'
 import { FaStar } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter, RouteComponentProps, useParams, BrowserRouter as Router, Link, Switch, Route, useHistory } from 'react-router-dom';
@@ -42,7 +42,7 @@ const DetailProduct:React.FunctionComponent<RouteComponentProps> = () => {
     useEffect(() => {
         axios.get(`http://localhost:4000/api/product/post/${_id}`)
             .then(result => {
-                console.log('isi api', result.data)
+                // console.log('isi api', result.data)
                 setData(result.data.data)
                 dispatch({
                     type: 'GET-DISKUSI',
@@ -68,69 +68,71 @@ const DetailProduct:React.FunctionComponent<RouteComponentProps> = () => {
         })
     },[_id, data?.harga, data?.jumlahBarang, dispatch, getDiskusi.length])
     
-    console.log('isi order', satuan, data)
-    const handleBucket = () => {
+    const hasil = useMemo(() => data, [data])
+    useMemo(() => satuan,  [satuan])
+    useMemo(() => gambar,  [gambar])
+    useMemo(() => alamat,  [alamat])
+    const handleBucket = useMemo (()=> () => {
         if(!isAuthenticated) {
             return alert('mohon login dulu untuk melanjutkanya!!!')
         }
-        dispatch(setOrder('namaBarang', data?.nama))
-        dispatch(setOrder('image', data?.imageId[0].imageUrl))
+        dispatch(setOrder('namaBarang', hasil?.nama))
+        dispatch(setOrder('image', hasil?.imageId[0].imageUrl))
         dispatch(setOrder('_id', _id))
         dispatch(setOrder('alamatId', alamat))
         dispatch({type: 'ORDERS'})
         history.push("/checkout")
-    }
+    },[_id, alamat, hasil?.imageId, hasil?.nama, dispatch, history, isAuthenticated])
 
-    const tambahBlanjaan = () => {
+    const tambahBlanjaan = useMemo(()=> () => {
         if(!isAuthenticated) {
             return alert('mohon login dulu untuk melanjutkanya!!!')
         }
-        dispatch(setOrder('namaBarang', data?.nama))
-        dispatch(setOrder('image', data?.imageId[0].imageUrl))
+        dispatch(setOrder('namaBarang', hasil?.nama))
+        dispatch(setOrder('image', hasil?.imageId[0].imageUrl))
         dispatch(setOrder('_id', _id))
         dispatch(setOrder('alamatId', alamat))
         dispatch({type: 'ORDERS'})
-    }
-
+    },[_id, alamat, dispatch, hasil?.imageId, hasil?.nama, isAuthenticated])
     return( <Router>
                 <div className="max-w-6xl mx-auto">
                     <div className="flex my-6 z-30">
                         <div>
-                            <img src={`http://localhost:4000/${data?.imageId[gambar].imageUrl}`} alt="d.product" className="w-80 h-80 rounded"/>
+                            <img src={`http://localhost:4000/${hasil?.imageId[gambar].imageUrl}`} alt="d.product" className="w-80 h-80 rounded"/>
                             <div  className= "flex my-2">
-                                <img src={`http://localhost:4000/${data?.imageId[0].imageUrl}`} alt="d.product" className="w-20 h-20 rounded" onClick={()=> setGambar(0)}/>
-                                <img src={`http://localhost:4000/${data?.imageId[1].imageUrl}`} alt="d.product" className="w-20 h-20 rounded mx-4" onClick={()=> setGambar(1)}/>
-                                <img src={`http://localhost:4000/${data?.imageId[2].imageUrl}`} alt="d.product" className="w-20 h-20 rounded" onClick={()=> setGambar(2)}/>
+                                <img src={`http://localhost:4000/${hasil?.imageId[0].imageUrl}`} alt="d.product" className="w-20 h-20 rounded" onClick={()=> setGambar(0)}/>
+                                <img src={`http://localhost:4000/${hasil?.imageId[1].imageUrl}`} alt="d.product" className="w-20 h-20 rounded mx-4" onClick={()=> setGambar(1)}/>
+                                <img src={`http://localhost:4000/${hasil?.imageId[2].imageUrl}`} alt="d.product" className="w-20 h-20 rounded" onClick={()=> setGambar(2)}/>
                             </div>
                         </div>
                         <div className="block ml-16 w-5/12">
-                            <h1 className="text-2xl">{data?.nama}</h1>
+                            <h1 className="text-2xl">{hasil?.nama}</h1>
                             <div className="flex gap-8 my-4">
-                                <p>Terjual {data?.terjual}</p>
-                                <p>Ulasan {data?.ulasanId.length}</p>
-                                <p>Diskusi {data?.diskusiId.length}</p>
-                                <p className="flex gap-1">Rating {data?.rating} <FaStar color={"#FFBA5A"}/></p>
+                                <p>Terjual {hasil?.terjual}</p>
+                                <p>Ulasan {hasil?.ulasanId.length}</p>
+                                <p>Diskusi {hasil?.diskusiId.length}</p>
+                                <p className="flex gap-1">Rating {hasil?.rating} <FaStar color={"#FFBA5A"}/></p>
                             </div>
-                            <p className="text-xl">Rp{data?.harga}</p>
+                            <p className="text-xl">Rp{hasil?.harga}</p>
                             <p className="p-2 pl-2 w-full my-2 border-t-2 border-b-2 border-gray-200"> Detail</p>
-                            <p>{data?.deskripsi}</p>
+                            <p>{hasil?.deskripsi}</p>
                         </div>
                         <Bucket 
                             className="ml-16" 
                             onclick={handleBucket}
                             tambahKranjang={tambahBlanjaan}
-                            note={(e: any)=>dispatch(setOrder('note', e.target.value))}
-                            tambah={() => {
+                            note={useMemo(()=>(e: React.ChangeEvent<HTMLTextAreaElement>)=>dispatch(setOrder('note', e.target.value)),[dispatch])}
+                            tambah={useMemo(()=>()=>{
                                 dispatch(setOrder('jumlahBarangOrder', jumlahBarangOrder >= stock ? stock : jumlahBarangOrder + 1))
                                 dispatch(setOrder('totalHargaOrder', harga + (harga * jumlahBarangOrder)))
-                            }}
-                            kurang={() => {
+                            },[dispatch, harga, jumlahBarangOrder, stock])}
+                            kurang={useMemo(()=>() => {
                                 dispatch(setOrder('jumlahBarangOrder', jumlahBarangOrder <= 1 ? 1 : jumlahBarangOrder - 1))
                                 dispatch(setOrder('totalHargaOrder', jumlahBarangOrder <= 1 ? harga : (harga * jumlahBarangOrder) - harga ))
-                            }}
+                            },[dispatch, harga, jumlahBarangOrder])}
                             totalHarga={totalHargaOrder}
                             jumlah={jumlahBarangOrder}
-                            stock={data?.jumlahBarang}
+                            stock={hasil?.jumlahBarang}
                         />
                     </div>
                     <div className="flex mb-4 p4 w-44 justify-between border-b-2">
@@ -149,5 +151,5 @@ const DetailProduct:React.FunctionComponent<RouteComponentProps> = () => {
             </Router>
     )
 }
-export default withRouter(DetailProduct);
+export default memo(withRouter(DetailProduct));
 
