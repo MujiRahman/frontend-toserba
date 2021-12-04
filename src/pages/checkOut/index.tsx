@@ -37,7 +37,7 @@ const CheckOut = () => {
                         <Tagihan 
                             key = {orders._id}
                             nama = {orders.namaBarang}
-                            image = {`http://localhost:4000/${orders.image}`}
+                            image = {`${process.env.REACT_APP_URL}/${orders.image}`}
                             harga = {orders.harga}
                             jumlah = {orders.jumlahBarangOrder}
                             total = {orders.totalHargaOrder}

@@ -27,7 +27,7 @@ const CreateProduct: React.FunctionComponent<RouteComponentProps> = () => {
     useEffect(() => {
         if (_id) {
             setUpdate(true)
-            axios.get(`http://localhost:4000/api/product/post/${_id}`)
+            axios.get(`${process.env.REACT_APP_URL}/api/product/post/${_id}`)
                 .then(result => {
                     const hasil = result.data.data;
                     dispatch(setCreateProduct('nama', hasil.nama))
@@ -37,7 +37,7 @@ const CreateProduct: React.FunctionComponent<RouteComponentProps> = () => {
                     dispatch(setCreateProduct('image', [...hasil.imageId] ))
                     let gbar = []
                     for(let i = 0; i < hasil.imageId.length; i++){
-                        const gmbar = `http://localhost:4000/${hasil.imageId[i].imageUrl}`;
+                        const gmbar = `${process.env.REACT_APP_URL}/${hasil.imageId[i].imageUrl}`;
                         gbar.push(gmbar)
                     }
                     setSelectedFiles(gbar)

@@ -32,15 +32,15 @@ const DetailProduct:React.FunctionComponent<RouteComponentProps> = () => {
     const { satuan } = useSelector((state: RootStore)=> state.orderReduser)
     const { getDiskusi } = useSelector((state: RootStore)=> state.productReducer)
     const { alamat } = auth
-    const { jumlahBarangOrder, harga, totalHargaOrder, stock} = satuan;
+    const { jumlahBarangOrder, harga, totalHargaOrder, stock, note } = satuan;
     const [data, setData] = useState<setDetail | null>(null)
     const {_id} = useParams<idParam>()
     const dispatch = useDispatch()
     const history = useHistory()
     const [gambar, setGambar] = useState<number >(0)
-    
+
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/product/post/${_id}`)
+        axios.get(`${process.env.REACT_APP_URL}/api/product/post/${_id}`)
             .then(result => {
                 // console.log('isi api', result.data)
                 setData(result.data.data)
@@ -65,6 +65,7 @@ const DetailProduct:React.FunctionComponent<RouteComponentProps> = () => {
             dispatch(setOrder('totalHargaOrder', 0))
             dispatch(setOrder('jumlahBarangOrder', 1))
             dispatch(setOrder('stock', 0))
+            dispatch(setOrder('note', ''))
         })
     },[_id, data?.harga, data?.jumlahBarang, dispatch, getDiskusi.length])
     
@@ -76,33 +77,39 @@ const DetailProduct:React.FunctionComponent<RouteComponentProps> = () => {
         if(!isAuthenticated) {
             return alert('mohon login dulu untuk melanjutkanya!!!')
         }
-        dispatch(setOrder('namaBarang', hasil?.nama))
-        dispatch(setOrder('image', hasil?.imageId[0].imageUrl))
-        dispatch(setOrder('_id', _id))
-        dispatch(setOrder('alamatId', alamat))
-        dispatch({type: 'ORDERS'})
-        history.push("/checkout")
-    },[_id, alamat, hasil?.imageId, hasil?.nama, dispatch, history, isAuthenticated])
-
-    const tambahBlanjaan = useMemo(()=> () => {
-        if(!isAuthenticated) {
-            return alert('mohon login dulu untuk melanjutkanya!!!')
+        if(auth.asalKota === undefined){
+            return alert('Mohon lengkapi data diri anda dulu')
         }
         dispatch(setOrder('namaBarang', hasil?.nama))
         dispatch(setOrder('image', hasil?.imageId[0].imageUrl))
         dispatch(setOrder('_id', _id))
         dispatch(setOrder('alamatId', alamat))
         dispatch({type: 'ORDERS'})
-    },[_id, alamat, dispatch, hasil?.imageId, hasil?.nama, isAuthenticated])
+        history.push("/checkout")
+    },[isAuthenticated, auth.asalKota, dispatch, hasil?.nama, hasil?.imageId, _id, alamat, history])
+
+    const tambahBlanjaan = useMemo(()=> () => {
+        if(!isAuthenticated) {
+            return alert('mohon login dulu untuk melanjutkanya!!!')
+        }
+        if(auth.asalKota === undefined){
+            return alert('Mohon lengkapi data diri anda dulu')
+        }
+        dispatch(setOrder('namaBarang', hasil?.nama))
+        dispatch(setOrder('image', hasil?.imageId[0].imageUrl))
+        dispatch(setOrder('_id', _id))
+        dispatch(setOrder('alamatId', alamat))
+        dispatch({type: 'ORDERS'})
+    },[_id, alamat, auth.asalKota, dispatch, hasil?.imageId, hasil?.nama, isAuthenticated])
     return( <Router>
                 <div className="max-w-6xl mx-auto">
                     <div className="flex my-6 z-30">
                         <div>
-                            <img src={`http://localhost:4000/${hasil?.imageId[gambar].imageUrl}`} alt="d.product" className="w-80 h-80 rounded"/>
+                            <img src={`${process.env.REACT_APP_URL}/${hasil?.imageId[gambar].imageUrl}`} alt="d.product" className="w-80 h-80 rounded"/>
                             <div  className= "flex my-2">
-                                <img src={`http://localhost:4000/${hasil?.imageId[0].imageUrl}`} alt="d.product" className="w-20 h-20 rounded" onClick={()=> setGambar(0)}/>
-                                <img src={`http://localhost:4000/${hasil?.imageId[1].imageUrl}`} alt="d.product" className="w-20 h-20 rounded mx-4" onClick={()=> setGambar(1)}/>
-                                <img src={`http://localhost:4000/${hasil?.imageId[2].imageUrl}`} alt="d.product" className="w-20 h-20 rounded" onClick={()=> setGambar(2)}/>
+                                <img src={`${process.env.REACT_APP_URL}/${hasil?.imageId[0].imageUrl}`} alt="d.product" className="w-20 h-20 rounded" onClick={()=> setGambar(0)}/>
+                                <img src={`${process.env.REACT_APP_URL}/${hasil?.imageId[1].imageUrl}`} alt="d.product" className="w-20 h-20 rounded mx-4" onClick={()=> setGambar(1)}/>
+                                <img src={`${process.env.REACT_APP_URL}/${hasil?.imageId[2].imageUrl}`} alt="d.product" className="w-20 h-20 rounded" onClick={()=> setGambar(2)}/>
                             </div>
                         </div>
                         <div className="block ml-16 w-5/12">
@@ -118,7 +125,8 @@ const DetailProduct:React.FunctionComponent<RouteComponentProps> = () => {
                             <p>{hasil?.deskripsi}</p>
                         </div>
                         <Bucket 
-                            className="ml-16" 
+                            className="ml-16"  
+                            valuenote={note}
                             onclick={handleBucket}
                             tambahKranjang={tambahBlanjaan}
                             note={useMemo(()=>(e: React.ChangeEvent<HTMLTextAreaElement>)=>dispatch(setOrder('note', e.target.value)),[dispatch])}

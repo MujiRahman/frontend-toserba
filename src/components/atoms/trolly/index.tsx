@@ -19,7 +19,7 @@ const Trolly= () => {
                     {
                         adaOrder ? 
                         <>
-                        <div className="dropdown-menu absolute hidden w-md p-2 -left-52 shadow-2xl rounded bg-white box-border">
+                        <div className="dropdown-menu absolute hidden w-96 p-2 -left-44 shadow-2xl rounded bg-white box-border">
                             <div className="my-1 flex justify-between items-center">
                                 <p className="p-2 text-sm font-semibold">Keranjang({order.length})</p>
                                 <div className="p-2 whitespace-no-wrap hover:bg-gray-200 cursor-pointer text-xs text-green-500 " onClick={()=> history.push('/checkout')}>Lihat Sekarang</div>
@@ -28,11 +28,13 @@ const Trolly= () => {
                             {
                                 order.map((orders: any)=>{
                                     return(
-                                        <div className="p-1 whitespace-no-wrap hover:bg-gray-200 cursor-pointer w-full flex items-center space-x-2" onClick={()=> history.push('/checkout')}>
-                                            <img src={`http://localhost:4000/${orders.image}`} alt="dumy" className="w-14 rounded"/>
-                                            <div className="p-2 text-left truncate">
-                                                <h2 className="">{orders.namaBarang}</h2>
-                                                <h4 className="text-xs">{orders.jumlahBarangOrder} Barang</h4>
+                                        <div className="p-1 whitespace-no-wrap hover:bg-gray-200 cursor-pointer w-full inline-flex items-center justify-between space-x-2" onClick={()=> history.push('/checkout')}>
+                                            <div className="flex">
+                                                <img src={`${process.env.REACT_APP_URL}/${orders.image}`} alt="dumy" className="w-14 rounded"/>
+                                                <div className="p-2 text-left truncate">
+                                                    <h2 className="">{orders.namaBarang}</h2>
+                                                    <h4 className="text-xs">{orders.jumlahBarangOrder}x Barang</h4>
+                                                </div>
                                             </div>
                                             <h1 className="font-semibold text-green-500">Rp{orders.totalHargaOrder}</h1>
                                         </div>

@@ -21,7 +21,7 @@ export const MyProfil: React.FC<Props> = ({className}) => {
                 <button className="p-2 rounded text-sm font-semibold hover:bg-gray-100"  >MyProfil</button>
                 <div className="dropdown-menu absolute hidden w-96 p-2 shadow-2xl rounded bg-white -left-64">
                     <button className="flex shadow-2xl mb-4 p-2 cursor-pointer w-full hover:bg-gray-100" onClick={()=> history.push("/profil")}>
-                        <img src={image? `http://localhost:4000/${image}` : dumy} alt="dumyprofil" className="w-14 h-14 rounded-full"/>
+                        <img src={image? `${process.env.REACT_APP_URL}/${image}` : dumy} alt="dumyprofil" className="w-14 h-14 rounded-full"/>
                         <div className="ml-2">
                             <p className="font-semibold text-lg">{user}</p>
                             <p>klik disini untuk melihat profil</p>

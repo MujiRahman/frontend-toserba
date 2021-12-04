@@ -31,11 +31,11 @@ export const AllProductUser = () => {
     }
 
     return (
-        <div className="flex flex-wrap gap-6 ml-6">{
+        <div className="flex flex-wrap gap-4 ml-1 mb-8 ">{
             productUser.map((hasil:any) => {
             return(
                 <div className="max-h-60 w-40 border-2 border-black rounded-lg shadow box-border p-1 box-border cursor-pointer" key={hasil._id}>
-                    <img src={`http://localhost:4000/imagesId/${hasil.imageId[0]}`} alt="img thumbnail" className="w-40 h-28 rounded"/>
+                    <img src={`${process.env.REACT_APP_URL}/imagesId/${hasil.imageId[0]}`} alt="img thumbnail" className="w-40 h-28 rounded"/>
                     <div className="px-1">
                         <p className="ont-sans truncate leading-tight">{hasil.nama}</p>
                         <p className=" text-lg font-medium">{hasil.harga}</p>

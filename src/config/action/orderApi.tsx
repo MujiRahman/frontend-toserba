@@ -16,7 +16,7 @@ export const orderBaru = (order: any) => (dispatch: any) => {
             note: order[i].note,
         }
         console.log('isi data', data)
-        axios.post(`http://localhost:4000/api/order/addOrder/${order[i]._id}`,queryString.stringify(data) , {
+        axios.post(`${process.env.REACT_APP_URL}/api/order/addOrder/${order[i]._id}`,queryString.stringify(data) , {
             headers:{
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'auth-token' :  localStorage.getItem('token')
@@ -34,7 +34,7 @@ export const orderBaru = (order: any) => (dispatch: any) => {
 }
 
 export const getAllOrderan = () => (dispatch: any) => {
-    axios.get('http://localhost:4000/api/order/addOrder', {
+    axios.get(`${process.env.REACT_APP_URL}/api/order/addOrder`, {
         headers:{
             'auth-token' :  localStorage.getItem('token')
         }
@@ -48,7 +48,7 @@ export const getAllOrderan = () => (dispatch: any) => {
 }
 
 export const upDateOrderan = (id: string) => (dispatch: any) => {
-    axios.post(`http://localhost:4000/api/order/upDateOrder/${id}`, {
+    axios.post(`${process.env.REACT_APP_URL}/api/order/upDateOrder/${id}`, {
         headers:{
             'auth-token' :  localStorage.getItem('token')
         }
@@ -67,7 +67,7 @@ export const upDateOrderan = (id: string) => (dispatch: any) => {
 }
 
 export const getAllPesenan = () => (dispatch: any) => {
-    axios.get('http://localhost:4000/api/order/logOrder', {
+    axios.get(`${process.env.REACT_APP_URL}/api/order/logOrder`, {
         headers:{
             'auth-token' :  localStorage.getItem('token')
         }
@@ -81,7 +81,7 @@ export const getAllPesenan = () => (dispatch: any) => {
 }
 
 export const upDatePesenan = (id: string, Prop:any) => (dispatch: any) => {
-    axios.post(`http://localhost:4000/api/order/upDateOrder1/${id}`, {
+    axios.post(`${process.env.REACT_APP_URL}/api/order/upDateOrder1/${id}`, {
         headers:{
             'auth-token' :  localStorage.getItem('token')
         }
@@ -104,7 +104,7 @@ export const postUlasan = (_id: string, currentValue: number , isi: string, prop
         rating: currentValue
     }
     console.log('isi ulasanapi', data)
-    axios.post(`http://localhost:4000/api/ulasan/post/${_id}`, queryString.stringify(data), {
+    axios.post(`${process.env.REACT_APP_URL}/api/ulasan/post/${_id}`, queryString.stringify(data), {
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded',
             'auth-token' :  localStorage.getItem('token')

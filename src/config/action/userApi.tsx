@@ -24,7 +24,7 @@ export const loginUserApi = (form:any, props: any ) =>(dispatch: any) => {
         password : form.password
     };
     
-    axios.post('http://localhost:4000/api/user/login',queryString.stringify(data) , {
+    axios.post(`${process.env.REACT_APP_URL}/api/user/login`,queryString.stringify(data) , {
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -89,7 +89,7 @@ export const registerUserApi = (data:any, props: any ) => {
     };
     
     console.log('isi data register', dataRegister)
-    axios.post('http://localhost:4000/api/user/register', queryString.stringify(dataRegister) , {
+    axios.post(`${process.env.REACT_APP_URL}/api/user/register`, queryString.stringify(dataRegister) , {
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -111,7 +111,7 @@ export const updateUserApi = ( auth: any, props: any) => (dispatch: any) => {
     data.append('asalKota', auth.asalKota)
     data.append('image', auth.image)
 
-    axios.put('http://localhost:4000/api/user/profil',data , {
+    axios.put(`${process.env.REACT_APP_URL}/api/user/profil`,data , {
         headers:{
             'Content-Type': 'multipart/form-data',
             'auth-token' :  localStorage.getItem('token')

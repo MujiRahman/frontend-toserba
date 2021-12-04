@@ -37,7 +37,7 @@ const Diskusi:React.FC<Props> = ({_id}) => {
                     hasilDiskusi.map((hasil: any)=>{
                         return(<>
                                 <div className="flex">
-                                    <img src={`http://localhost:4000/${hasil.imageProfil}`} alt="" className='w-20 h-20 rounded-full mr-4' />
+                                    <img src={`${process.env.REACT_APP_URL}/${hasil.imageProfil}`} alt="" className='w-20 h-20 rounded-full mr-4' />
                                     <div>
                                         <p className='text-lg'>{hasil.nama}</p>
                                         <p className="mb-4 text-sm">{hasil.comment}</p>

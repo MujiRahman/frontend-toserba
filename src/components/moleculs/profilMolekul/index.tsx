@@ -11,7 +11,7 @@ const ProfilMolekul = () => {
     return (
         <div className="flex gap-8"  key={id}>
             <div>
-                <img src={image? `http://localhost:4000/${image}` : dumy} alt="gmbar" className="w-40 h-40 rounded-lg shadow-2" />
+                <img src={image? `${process.env.REACT_APP_URL}/${image}` : dumy} alt="gmbar" className="w-40 h-40 rounded-lg shadow-2" />
                 <button className="bg-red-600 p-2 rounded-lg w-24 mt-4 ml-8" onClick={()=>history.push("/profil/edit")}>edit</button>
             </div>
             <div className="p-2 space-y-2 ">

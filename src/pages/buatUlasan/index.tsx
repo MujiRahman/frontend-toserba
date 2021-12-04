@@ -49,7 +49,7 @@ const BuatUlasan = () => {
         <div className='w-full'>
             <p className='text-lg'>Beri sedikit ulasannya dong...</p>
             <div className="ml-32 w-72">
-                <img src={`http://localhost:4000/imagesById/${productUlasan.imageProduct}`} alt="gambar product"  className='w-52 h-52 rounded-lg mt-4 mb-2'/>
+                <img src={`${process.env.REACT_APP_URL}/imagesById/${productUlasan.imageProduct}`} alt="gambar product"  className='w-52 h-52 rounded-lg mt-4 mb-2'/>
                 <p>{productUlasan.namaBarang}</p>
                 <div className="flex">
                     {

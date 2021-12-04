@@ -9,10 +9,11 @@ interface Props{
     kurang:()=>void,
     totalHarga:number,
     jumlah: number
-    stock: number | undefined
+    stock: number | undefined,
+    valuenote: string
 }
 
-const Bucket: FC<Props> = ({className, onclick, tambah, kurang, note, totalHarga, jumlah, stock, tambahKranjang }) => {
+const Bucket: FC<Props> = ({className, onclick, tambah, kurang, note, totalHarga, jumlah, stock, tambahKranjang, valuenote }) => {
     console.log('bucket render')
     return (
         <div className={className}>
@@ -24,7 +25,7 @@ const Bucket: FC<Props> = ({className, onclick, tambah, kurang, note, totalHarga
                     <button className="h-6 w-6 bg-green-400 rounded mr-8" onClick={tambah}> + </button>
                     <p>stock {stock}</p>
                 </div>
-                <textarea placeholder="tambah catatan" className="p-2 border text-green-800 rounded-xl my-2 " onChange={note}/>
+                <textarea placeholder="tambah catatan" className="p-2 border text-green-800 rounded-xl my-2 " value={valuenote} onChange={note}/>
                 <div className="flex justify-between border-b-2">
                     <p>Subtotal</p>
                     <p>Rp{totalHarga}</p>

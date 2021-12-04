@@ -20,7 +20,7 @@ export const createDataProduct = (createProduct: any, props: any) => {
     data.append('deskripsi', createProduct.deskripsi)
 
     console.log('isi data', createProduct)
-    axios.post('http://localhost:4000/api/product/post',data , {
+    axios.post(`${process.env.REACT_APP_URL}/api/product/post`,data , {
         headers:{
             'Content-Type': 'multipart/form-data',
             'auth-token' :  localStorage.getItem('token')
@@ -34,7 +34,7 @@ export const createDataProduct = (createProduct: any, props: any) => {
 }
 
 export const getAllDataUser = () => (dispatch: any) => {
-    axios.get('http://localhost:4000/api/product/posts/ByUser',{headers:{
+    axios.get(`${process.env.REACT_APP_URL}/api/product/posts/ByUser`,{headers:{
         'auth-token' :  localStorage.getItem('token')
     }})
         .then(result => {
@@ -57,7 +57,7 @@ export const updateDataProduct = (createProduct: any, _id: string, props: any) =
     data.append('jumlahBarang', createProduct.jumlahBarang)
     data.append('deskripsi', createProduct.deskripsi)
 
-    axios.put(`http://localhost:4000/api/product/post/${_id}`,data , {
+    axios.put(`${process.env.REACT_APP_URL}/api/product/post/${_id}`,data , {
         headers:{
             'Content-Type': 'multipart/form-data',
             'auth-token' :  localStorage.getItem('token')
@@ -79,7 +79,7 @@ export const postDiskusi = (diskusi:string, _id:string) => (dispatch: any) => {
         comment : diskusi
     }
 
-    axios.post(`http://localhost:4000/api/diskusi/post/${_id}`, queryString.stringify(data), {
+    axios.post(`${process.env.REACT_APP_URL}/api/diskusi/post/${_id}`, queryString.stringify(data), {
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded',
             'auth-token' :  localStorage.getItem('token')

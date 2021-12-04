@@ -29,7 +29,7 @@ const Pesenan = () => {
             orderan.map((hasil:any) => {
                 return(
                     <div className="flex w-2/3 mb-2 items-center gap-6 border-2 border-black p-4 rounded-lg">
-                        <img src={`http://localhost:4000/imagesById/${hasil.imageProduct}`} alt="g.pesanan" className="w-20 h-20 rounded-lg" />
+                        <img src={`${process.env.REACT_APP_URL}/imagesById/${hasil.imageProduct}`} alt="g.pesanan" className="w-20 h-20 rounded-lg" />
                         <div  className='overflow-hidden'>
                             <div className="flex">
                                 <p>{hasil.namaBarang}</p>

@@ -31,7 +31,7 @@ const EditProfil = () => {
         dispatch(setAuth('image', file));
         dispatch(setImagePrev(URL.createObjectURL(file)));
     }
-    console.log('isi ProfilMolekul',auth )
+    console.log('isi ProfilMolekul',auth, imagePrev )
     return (
         <div className='w-96'>
             <form>
@@ -45,7 +45,7 @@ const EditProfil = () => {
                 <label className="flex flex-row mb-2">ganti alamat</label>
                 <textarea value={alamat} className="w-full h-40 p-2 rounded-lg box-border focus:border-black border-2" placeholder="masukan alamat rumah anda" onChange={(e)=> dispatch(setAuth('alamat', e.target.value))}/>
                 <label className="flex flex-row mb-2">ganti foto profil</label>
-                <ButtonInput onChange={(e)=> onImageUload(e)} img={imagePrev=== undefined ? `http://localhost:4000/${auth.image}` : imagePrev} />
+                <ButtonInput onChange={(e)=> onImageUload(e)} img={imagePrev=== undefined ? `${process.env.REACT_APP_URL}/${auth.image}` : imagePrev} />
             </form>
             <div className="flex my-8 gap-6">
                 <button className="w-20 bg-gray-400 p-2 rounded-lg" onClick={handleBatal}>Batal</button>

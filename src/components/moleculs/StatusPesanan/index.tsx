@@ -25,7 +25,6 @@ const StatusPesananMolekul = () => {
 
     const sampai = (_id: string) => {
         dispatch(upDatePesenan(_id, Prop))
-        console.log('isi pesenan', _id)
     }
 
     pesenan.sort(function (a: any, b: any) {
@@ -43,7 +42,7 @@ const StatusPesananMolekul = () => {
                         <div className="my-auto w-1/2 mb-2 bg-gray-200 p-4 rounded-lg">
                             <p className='text-xl mb-2'>Status pemesanan anda sudah sampai</p>
                             <div className="flex">
-                                <img src={`http://localhost:4000/imagesById/${hasil.imageProduct}`} alt="gambar product" className='w-20 h-20 rounded-lg mr-4 mb-2' />
+                                <img src={`${process.env.REACT_APP_URL}/imagesById/${hasil.imageProduct}`} alt="gambar product" className='w-20 h-20 rounded-lg mr-4 mb-2' />
                                 <div>
                                     <p>{hasil.namaBarang}</p>
                                     <div className="flex gap-2">
@@ -61,7 +60,7 @@ const StatusPesananMolekul = () => {
                         <div className="my-auto w-1/2 mb-2 p-4 rounded-lg">
                             <p className='text-xl mb-2'>Status pemesanan anda sedang {hasil.dikirim ? "dikirim" : "diproses"}</p>
                             <div className="flex">
-                                <img src={`http://localhost:4000/imagesById/${hasil.imageProduct}`} alt="gambar product" className='w-20 h-20 rounded-lg mr-4 mb-2' />
+                                <img src={`${process.env.REACT_APP_URL}/imagesById/${hasil.imageProduct}`} alt="gambar product" className='w-20 h-20 rounded-lg mr-4 mb-2' />
                                 <div>
                                     <p>{hasil.namaBarang}</p>
                                     <div className="flex gap-2">
